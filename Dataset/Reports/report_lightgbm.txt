@@ -1,0 +1,11 @@
+LIGHTGBM Classification Report
+              precision    recall  f1-score   support
+
+           0     0.9996    0.9993    0.9995    429380
+           1     0.9965    0.9981    0.9973     85148
+
+    accuracy                         0.9991    514528
+   macro avg     0.9980    0.9987    0.9984    514528
+weighted avg     0.9991    0.9991    0.9991    514528
+
+ROC-AUC: 1.0000

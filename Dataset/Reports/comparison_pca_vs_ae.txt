@@ -1,0 +1,17 @@
+PCA vs AE - SVM Model Metric Comparison
+==================================================
+
+PCA + Linear SVM:
+  Accuracy: 0.9234
+  Precision (Attack): 1.0000
+  Recall (Attack): 0.9511
+  F1-score (Attack): 0.5664
+  ROC AUC: 0.9735
+
+AE + RBF SVM:
+  Accuracy: 0.9438
+  Precision (Attack): 1.0000
+  Recall (Attack): 0.8589
+  F1-score (Attack): 0.7902
+  ROC AUC: 0.9639
+

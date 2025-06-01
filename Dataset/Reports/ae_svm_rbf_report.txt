@@ -1,0 +1,11 @@
+AE + Approx RBF SVM Classification Report
+              precision    recall  f1-score   support
+
+           0     0.9590    0.9742    0.9666    429380
+           1     0.8589    0.7902    0.8231     85148
+
+    accuracy                         0.9438    514528
+   macro avg     0.9089    0.8822    0.8948    514528
+weighted avg     0.9425    0.9438    0.9428    514528
+
+ROC-AUC: 0.9639

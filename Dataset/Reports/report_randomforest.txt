@@ -1,0 +1,11 @@
+RANDOMFOREST Classification Report
+              precision    recall  f1-score   support
+
+           0     0.9993    0.9994    0.9994    429380
+           1     0.9970    0.9967    0.9968     85148
+
+    accuracy                         0.9990    514528
+   macro avg     0.9982    0.9981    0.9981    514528
+weighted avg     0.9990    0.9990    0.9990    514528
+
+ROC-AUC: 1.0000

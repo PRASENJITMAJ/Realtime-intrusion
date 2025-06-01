@@ -1,0 +1,11 @@
+XGBOOST Classification Report
+              precision    recall  f1-score   support
+
+           0     0.9997    0.9993    0.9995    429380
+           1     0.9967    0.9984    0.9976     85148
+
+    accuracy                         0.9992    514528
+   macro avg     0.9982    0.9989    0.9985    514528
+weighted avg     0.9992    0.9992    0.9992    514528
+
+ROC-AUC: 1.0000
