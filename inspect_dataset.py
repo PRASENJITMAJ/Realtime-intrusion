@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-FOLDER_PATH = "/Users/radha-krishna1060/Desktop/RealTime_IDS/Dataset"  # <- CHANGE THIS
+FOLDER_PATH = "/Users/radha-krishna1060/Desktop/RealTime_IDS/Dataset" 
 
 
 csv_files = [os.path.join(FOLDER_PATH, f) for f in os.listdir(FOLDER_PATH) if f.endswith('.csv')]
@@ -27,17 +27,17 @@ for file in csv_files:
         
         all_columns.append(set(df.columns))
 
-        # 🔹 Label distribution
+        
         if 'Label' in df.columns:
             label_counts[file] = df['Label'].value_counts().to_dict()
         else:
             print("❌ 'Label' column not found.")
 
-        # 🔹 Nulls and Infs
+       
         null_counts[file] = df.isnull().sum().sum()
         infinite_counts[file] = np.isinf(df.select_dtypes(include=[np.number])).sum().sum()
 
-        # 🔹 Rows and duplicates
+       
         row_counts[file] = len(df)
         duplicate_counts[file] = df.duplicated().sum()
 

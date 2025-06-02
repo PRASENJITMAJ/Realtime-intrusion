@@ -102,7 +102,7 @@ def predict_flow(flow_key, flow_packets):
     if pca:
         X_scaled = pca.transform(X_scaled)
     elif rbf_sampler:
-        encoded_input = X_scaled[:, :encoder_dim]  # Assuming 32-dim encoder output
+        encoded_input = X_scaled[:, :encoder_dim]  
         X_scaled = rbf_sampler.transform(encoded_input)
     try:
         prediction = model.predict(X_scaled)[0]

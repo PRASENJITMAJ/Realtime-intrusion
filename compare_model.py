@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 REPORT_DIR = "/Users/radha-krishna1060/Documents/RealTime_IDS/Dataset/Reports"
 
-# === Extract metrics from report ===
+
 def extract_metrics(filepath):
     metrics = {"Accuracy": None, "Precision (Attack)": None, "Recall (Attack)": None, "F1-score (Attack)": None, "ROC AUC": None}
     with open(filepath, 'r') as f:

@@ -13,7 +13,7 @@ from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
 
-# Paths
+
 ROOT_DIR = "/Users/radha-krishna1060/Desktop/RealTime_IDS"
 DATASET_PATH = os.path.join(ROOT_DIR, "Dataset/cleaned_dataset.csv")
 MODEL_DIR = os.path.join(ROOT_DIR, "Dataset/Phase2_Models")
@@ -21,7 +21,7 @@ REPORT_DIR = os.path.join(ROOT_DIR, "Dataset/Reports")
 os.makedirs(MODEL_DIR, exist_ok=True)
 os.makedirs(REPORT_DIR, exist_ok=True)
 
-# Load Data
+
 print("📥 Loading dataset...")
 df = pd.read_csv(DATASET_PATH)
 df.columns = df.columns.str.strip()
@@ -31,23 +31,22 @@ y = df["AttackLabel"]
 
 X = X.apply(pd.to_numeric, errors="coerce").fillna(0)
 
-# Scaling
 print("📐 Scaling features...")
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# Save scaler + feature list
+
 joblib.dump(scaler, os.path.join(MODEL_DIR, "scaler.pkl"))
 with open(os.path.join(MODEL_DIR, "features.txt"), "w") as f:
     f.write("\n".join(X.columns))
 
-# Train/test split
+
 print("✂️ Splitting dataset...")
 X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size=0.2, stratify=y, random_state=42
 )
 
-# Model definitions
+
 models = {
     "randomforest": RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1),
     "xgboost": XGBClassifier(n_estimators=100, use_label_encoder=False, eval_metric='logloss', verbosity=0),
@@ -61,7 +60,7 @@ def evaluate_and_save(model_name, model):
     y_pred = model.predict(X_test)
     y_prob = model.predict_proba(X_test)[:, 1]
 
-    # Evaluation
+    
     print(f"📊 Evaluating {model_name}...")
     report = classification_report(y_test, y_pred, digits=4)
     auc = roc_auc_score(y_test, y_prob)
@@ -71,7 +70,7 @@ def evaluate_and_save(model_name, model):
         f.write(report)
         f.write(f"\nROC-AUC: {auc:.4f}\n")
 
-    # ROC curve
+    
     fpr, tpr, _ = roc_curve(y_test, y_prob)
     plt.figure()
     plt.plot(fpr, tpr, label=f"AUC = {auc:.4f}")
@@ -83,7 +82,7 @@ def evaluate_and_save(model_name, model):
     plt.savefig(os.path.join(REPORT_DIR, f"roc_{model_name}.png"))
     plt.close()
 
-    # Confusion matrix
+    
     cm = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(6, 5))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["Benign", "Attack"], yticklabels=["Benign", "Attack"])
@@ -93,11 +92,11 @@ def evaluate_and_save(model_name, model):
     plt.savefig(os.path.join(REPORT_DIR, f"confusion_{model_name}.png"))
     plt.close()
 
-    # Save model
+    
     joblib.dump(model, os.path.join(MODEL_DIR, f"model_{model_name}.pkl"))
     print(f"✅ {model_name.upper()} saved to: model_{model_name}.pkl")
 
-# Run all models
+
 for name, model in models.items():
     evaluate_and_save(name, model)
 

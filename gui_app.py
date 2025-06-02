@@ -10,7 +10,7 @@ from datetime import datetime
 
 from scapy.all import sniff, IP, TCP, UDP
 
-# File paths
+
 ROOT = "C:\\Users\\majum\\OneDrive\\Pictures\\RealTime_IDS"
 MODEL_DIR = os.path.join(ROOT, "Dataset/Phase2_Models")
 MODEL_PATH = os.path.join(MODEL_DIR, "model_randomforest.pkl")
@@ -19,7 +19,7 @@ FEATURES_PATH = os.path.join(MODEL_DIR, "features.txt")
 
 FLOW_TIMEOUT = 5
 
-# Load model and scaler
+
 model = joblib.load(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
 with open(FEATURES_PATH, "r") as f:
@@ -29,7 +29,7 @@ active_flows = defaultdict(list)
 flow_lock = threading.Lock()
 detection_logs = []
 
-# Feature extraction
+
 def extract_features(flow_packets):
     if len(flow_packets) < 1:
         return None
@@ -61,7 +61,7 @@ def extract_features(flow_packets):
 
     return features
 
-# Predict function
+
 def predict_flow(flow_key, flow_packets):
     features = extract_features(flow_packets)
     if not features:
@@ -84,7 +84,7 @@ def predict_flow(flow_key, flow_packets):
 
     detection_logs.append(msg)
 
-# Expired flow monitoring
+
 def monitor_flows():
     while st.session_state.running:
         now = time.time()
@@ -105,7 +105,7 @@ def monitor_flows():
 
         time.sleep(1)
 
-# Packet handler
+
 def handle_packet(pkt):
     if not IP in pkt:
         return
@@ -134,17 +134,17 @@ def handle_packet(pkt):
         else:
             active_flows[flow_key].append(pkt_data)
 
-# Start IDS system
+
 def start_ids():
     st.session_state.running = True
     threading.Thread(target=monitor_flows, daemon=True).start()
     sniff(prn=handle_packet, store=False, stop_filter=lambda x: not st.session_state.running)
 
-# Stop IDS system
+
 def stop_ids():
     st.session_state.running = False
 
-# ------------------ Streamlit GUI -------------------
+
 st.set_page_config(page_title="Real-Time IDS", layout="wide")
 
 if "running" not in st.session_state:

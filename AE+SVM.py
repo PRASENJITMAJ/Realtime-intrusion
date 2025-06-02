@@ -15,11 +15,11 @@ from tensorflow.keras.optimizers import Adam # type: ignore
 import joblib
 import tensorflow as tf
 
-# TensorFlow Info
+
 print("TensorFlow Version:", tf.__version__)
 print("Available GPUs:", tf.config.list_physical_devices('GPU'))
 
-# Paths
+
 ROOT_DIR = "/Users/radha-krishna1060/Documents/RealTime_IDS"
 DATASET_PATH = os.path.join(ROOT_DIR, "Dataset", "cleaned_dataset.csv")
 REPORT_DIR = os.path.join(ROOT_DIR, "Phase2_Reports")
@@ -27,7 +27,7 @@ MODEL_DIR = os.path.join(ROOT_DIR, "Phase2_Models")
 os.makedirs(REPORT_DIR, exist_ok=True)
 os.makedirs(MODEL_DIR, exist_ok=True)
 
-# Start timer
+
 T0 = time.time()
 
 
